@@ -23,21 +23,25 @@
     var CONFIG = {"hostname":"dashuai916.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="TensorRT是Nvidia开发的用于加速模型推理的SDK">
+  <meta name="description" content="R-CNN、Fast R-CNN、Faster R-CNN学习笔记。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="TensorRT学习笔记">
-<meta property="og:url" content="https://dashuai916.github.io/2021/05/07/trt-study/index.html">
+<meta property="og:title" content="二阶段网络学习">
+<meta property="og:url" content="https://dashuai916.github.io/2021/05/08/two-stage-network/index.html">
 <meta property="og:site_name" content="Dashuai&#39;s home page">
-<meta property="og:description" content="TensorRT是Nvidia开发的用于加速模型推理的SDK">
+<meta property="og:description" content="R-CNN、Fast R-CNN、Faster R-CNN学习笔记。">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/graphics/overview.png">
-<meta property="article:published_time" content="2021-05-07T06:00:14.000Z">
-<meta property="article:modified_time" content="2021-05-08T05:55:11.046Z">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-2aab48821f9d431863ad707cd7564721_720w.jpg">
+<meta property="og:image" content="https://dashuai916.github.io/images/blogs/Fast_R-CNN_architecture.png">
+<meta property="article:published_time" content="2021-05-08T05:43:57.000Z">
+<meta property="article:modified_time" content="2021-05-08T07:37:03.258Z">
 <meta property="article:author" content="Yu">
+<meta property="article:tag" content="rcnn">
+<meta property="article:tag" content="fast-rcnn">
+<meta property="article:tag" content="faster-rcnn">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/graphics/overview.png">
+<meta name="twitter:image" content="https://pic2.zhimg.com/80/v2-2aab48821f9d431863ad707cd7564721_720w.jpg">
 
-<link rel="canonical" href="https://dashuai916.github.io/2021/05/07/trt-study/">
+<link rel="canonical" href="https://dashuai916.github.io/2021/05/08/two-stage-network/">
 
 
 <script id="page-configurations">
@@ -50,7 +54,7 @@
   };
 </script>
 
-  <title>TensorRT学习笔记 | Dashuai's home page</title>
+  <title>二阶段网络学习 | Dashuai's home page</title>
   
 
 
@@ -162,7 +166,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://dashuai916.github.io/2021/05/07/trt-study/">
+    <link itemprop="mainEntityOfPage" href="https://dashuai916.github.io/2021/05/08/two-stage-network/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
@@ -175,7 +179,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          TensorRT学习笔记
+          二阶段网络学习
         </h1>
 
         <div class="post-meta">
@@ -184,23 +188,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-05-07 14:00:14" itemprop="dateCreated datePublished" datetime="2021-05-07T14:00:14+08:00">2021-05-07</time>
+              <time title="创建时间：2021-05-08 13:43:57 / 修改时间：15:37:03" itemprop="dateCreated datePublished" datetime="2021-05-08T13:43:57+08:00">2021-05-08</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-08 13:55:11" itemprop="dateModified" datetime="2021-05-08T13:55:11+08:00">2021-05-08</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E9%83%A8%E7%BD%B2/" itemprop="url" rel="index"><span itemprop="name">深度学习部署</span></a>
+                  <a href="/categories/two-stage-network/" itemprop="url" rel="index"><span itemprop="name">two stage network</span></a>
                 </span>
             </span>
 
@@ -223,21 +221,61 @@
 
       
         <blockquote>
-<p>TensorRT是Nvidia开发的用于加速模型推理的SDK</p>
+<p>R-CNN、Fast R-CNN、Faster R-CNN学习笔记。</p>
 </blockquote>
 <span id="more"></span>
 
-<p><img src="https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/graphics/overview.png" alt="官方图"></p>
-<p>pytorch –&gt; tensorrt工具：<a target="_blank" rel="noopener" href="https://github.com/NVIDIA-AI-IOT/torch2trt">torch2trt</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/NVIDIA-AI-IOT/torch2trt</span><br><span class="line">cd torch2trt</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
-
 <hr>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="1-转换"><a href="#1-转换" class="headerlink" title="1.  转换"></a>1.  转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch2trt <span class="keyword">import</span> torch2trt</span><br><span class="line"><span class="keyword">from</span> torchvision.models.alexnet <span class="keyword">import</span> alexnet</span><br><span class="line"></span><br><span class="line"><span class="comment"># create some regular pytorch model...</span></span><br><span class="line">model = alexnet(pretrained=<span class="literal">True</span>).<span class="built_in">eval</span>().cuda()</span><br><span class="line"></span><br><span class="line"><span class="comment"># create example data</span></span><br><span class="line">x = torch.ones((<span class="number">1</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)).cuda()</span><br><span class="line"></span><br><span class="line"><span class="comment"># convert to TensorRT feeding sample data as input</span></span><br><span class="line">model_trt = torch2trt(model, [x])</span><br></pre></td></tr></table></figure>
-
-<h3 id="2-执行"><a href="#2-执行" class="headerlink" title="2. 执行"></a>2. 执行</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = model(x)</span><br><span class="line">y_trt = model_trt(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># check the output against PyTorch</span></span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">max</span>(torch.<span class="built_in">abs</span>(y - y_trt)))</span><br></pre></td></tr></table></figure>
-
-<h3 id="3-保存和加载"><a href="#3-保存和加载" class="headerlink" title="3. 保存和加载"></a>3. 保存和加载</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save</span></span><br><span class="line">torch.save(model_trt.state_dict(), <span class="string">&#x27;alexnet_trt.pth&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># load</span></span><br><span class="line"><span class="keyword">from</span> torch2trt <span class="keyword">import</span> TRTModule</span><br><span class="line"></span><br><span class="line">model_trt = TRTModule()</span><br><span class="line">model_trt.load_state_dict(torch.load(<span class="string">&#x27;alexnet_trt.pth&#x27;</span>))</span><br></pre></td></tr></table></figure>
-
+<p><img src="https://pic2.zhimg.com/80/v2-2aab48821f9d431863ad707cd7564721_720w.jpg" alt="网络结构对比"></p>
+<hr>
+<h1 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h1><blockquote>
+<p>题目：Rich feature hierarchies for accurate object detection and semantic segmentation</p>
+<p>Ross Girshick，Jeff Donahue,Trevor Darrell,Jitendra Malik; 2014 </p>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1311.2524">下载原文</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jwenxue/article/details/107619509">参考翻译</a></p>
+</blockquote>
+<hr>
+<hr>
+<h1 id="Fast-R-CNN"><a href="#Fast-R-CNN" class="headerlink" title="Fast R-CNN"></a>Fast R-CNN</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="http://www.cv-foundation.org/openaccess/content_iccv_2015/papers/Girshick_Fast_R-CNN_ICCV_2015_paper.pdf">下载原文</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jwenxue/article/details/107645671">参考翻译</a></p>
+</blockquote>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Fast R-CNN 在 R-CNN 和 SPPnets 的基础上优化，比 R-CNN 和 SPPnets 更快更准。</p>
+<hr>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><h3 id="R-CNN的缺点"><a href="#R-CNN的缺点" class="headerlink" title="R-CNN的缺点"></a>R-CNN的缺点</h3><ol>
+<li>训练是一个多阶段的过程：首先，使用log损失函数在对象建议框上迁移学习。其次，对卷积层的特征图使用SVM分类，SVM作为物体检测器，替代了softmax分类器。训练最后的阶段，学习bbox回归。</li>
+<li>训练消耗时间和空间：对于SVM和包围盒回归器训练，从每个图像中的每个对象建议中提取特征并写入磁盘。对于非常深的网络，例如VGG16，这个过程需要2.5个GPU-days来处理VOC07训练集的5k张图像。这些功能需要数百GB的存储空间。</li>
+<li>物体检测速度很慢：在测试时，从每个测试图像中的每个对象建议中提取特征。VGG16检测每张图片需要47s (在GPU上)。</li>
+</ol>
+<p><em>R-CNN速度很慢是因为它的每一个建议区域都要分别执行卷积计算，没有共享计算。SPPnets被提出通过共享计算来加速R-CNN。</em></p>
+<blockquote>
+<p>SPPnet方法计算整个输入图像的卷积特征图，然后使用从共享特征图中提取的特征向量对每个对象建议进行分类。通过最大池化将候选框内的特征图转化为固定大小的输出（例如6×6）来提取针对候选框的特征。多个输出大小被合并，然后像空间金字塔合并一样连接在一起。SPPnet在测试时间加速R-CNN 10到100倍。由于更快的建议特征提取，训练时间也减少了3倍。</p>
+<p>SPP网络也有显著的缺点。像R-CNN一样，训练过程是一个多级pipeline，涉及提取特征、使用log损失对网络进行fine-tuning、训练SVM分类器以及最后拟合检测框回归。特征也要写入磁盘。但与R-CNN不同，在SPPnets文章中提出的fine-tuning算法不能更新在空间金字塔池之前的卷积层。不出所料，这种局限性（固定的卷积层）限制了深层网络的精度。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/forever__1234/article/details/79910175">SPPnet讲解</a></p>
+</blockquote>
+<h3 id="贡献"><a href="#贡献" class="headerlink" title="贡献"></a>贡献</h3><p>我们提出了一种新的训练算法，该算法在提高速度和精度的同时，弥补了R-CNN和SPPnet的不足。我们称这种方法为Faster R-CNN。Faster R-CNN有几个优点:</p>
+<ol>
+<li>检测质量(mAP)高于R-CNN、SPPnet</li>
+<li>训练是单阶段的，使用多任务损失</li>
+<li>训练可以更新所有网络层</li>
+<li>特征缓存不需要磁盘存储</li>
+</ol>
+<p>Fast R-CNN is written in Python and C++ (Caffe[13]) ：<a target="_blank" rel="noopener" href="https://github.com/rbgirshick/fast-rcnn">https://github.com/rbgirshick/fast-rcnn</a>.</p>
+<hr>
+<h2 id="Fast-R-CNN的结构和训练"><a href="#Fast-R-CNN的结构和训练" class="headerlink" title="Fast R-CNN的结构和训练"></a>Fast R-CNN的结构和训练</h2><p><img src="/images/blogs/Fast_R-CNN_architecture.png"></p>
+<blockquote>
+<p>图1. Fast R-CNN架构。输入图像和多个感兴趣区域（RoI）被输入到全卷积网络中。每个RoI被池化到固定大小的特征图中，然后通过全连接层（FC）映射到特征向量。网络对于每个RoI具有两个输出向量：Softmax概率和每类bounding-box回归偏移量。该架构是使用多任务损失进行端到端训练的。</p>
+</blockquote>
+<p>Fast R-CNN网络将整个图像和一组候选框作为输入。网络首先使用几个卷积层（conv）和最大池化层来处理整个图像，以产生卷积特征图。然后，对于每个候选框，RoI池化层从特征图中提取固定长度的特征向量。每个特征向量被送入一系列全连接（fc）层中，其最终分支成两个同级输出层 ：一个输出K个类别加上1个包含所有背景类别的Softmax概率估计，另一个层输出K个类别的每一个类别输出四个实数值。每组4个值表示K个类别中一个类别的修正后检测框位置。</p>
+<hr>
+<hr>
+<h1 id="Faster-R-CNN"><a href="#Faster-R-CNN" class="headerlink" title="Faster R-CNN"></a>Faster R-CNN</h1><blockquote>
+<p><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1506.01497">下载原文</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Jwenxue/article/details/107671999">参考翻译</a></p>
+</blockquote>
+<h2 id="摘要-1"><a href="#摘要-1" class="headerlink" title="摘要"></a>摘要</h2><p><em>第一个端到端网络。</em></p>
+<hr>
+<p>参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/Jwenxue/article/details/107737752">目标检测网络翻译汇总</a></p>
 
     </div>
 
@@ -261,6 +299,11 @@
 
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/rcnn/" rel="tag"># rcnn</a>
+              <a href="/tags/fast-rcnn/" rel="tag"># fast-rcnn</a>
+              <a href="/tags/faster-rcnn/" rel="tag"># faster-rcnn</a>
+          </div>
 
         
 
@@ -268,13 +311,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/04/23/OICR/" rel="prev" title="OICR">
-      <i class="fa fa-chevron-left"></i> OICR
+    <a href="/2021/05/07/trt-study/" rel="prev" title="TensorRT学习笔记">
+      <i class="fa fa-chevron-left"></i> TensorRT学习笔记
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/05/08/two-stage-network/" rel="next" title="二阶段网络学习">
-      二阶段网络学习 <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -333,7 +373,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.1.</span> <span class="nav-text">1.  转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%A7%E8%A1%8C"><span class="nav-number">2.2.</span> <span class="nav-text">2. 执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BF%9D%E5%AD%98%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">3. 保存和加载</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#R-CNN"><span class="nav-number">1.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Fast-R-CNN"><span class="nav-number">2.</span> <span class="nav-text">Fast R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">2.1.</span> <span class="nav-text">摘要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">2.2.</span> <span class="nav-text">介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#R-CNN%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">2.2.1.</span> <span class="nav-text">R-CNN的缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B4%A1%E7%8C%AE"><span class="nav-number">2.2.2.</span> <span class="nav-text">贡献</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Fast-R-CNN%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E8%AE%AD%E7%BB%83"><span class="nav-number">2.3.</span> <span class="nav-text">Fast R-CNN的结构和训练</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Faster-R-CNN"><span class="nav-number">3.</span> <span class="nav-text">Faster R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%91%98%E8%A6%81-1"><span class="nav-number">3.1.</span> <span class="nav-text">摘要</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
