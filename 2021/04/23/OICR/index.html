@@ -23,16 +23,16 @@
     var CONFIG = {"hostname":"dashuai916.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="Multiple Instance Detection Network with Online Instance Classifier Refinement">
+  <meta name="description" content="Multiple Instance Detection Network with Online Instance Classifier Refinement 华中科大 2017">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OICR">
 <meta property="og:url" content="https://dashuai916.github.io/2021/04/23/OICR/index.html">
 <meta property="og:site_name" content="Dashuai&#39;s home page">
-<meta property="og:description" content="Multiple Instance Detection Network with Online Instance Classifier Refinement">
+<meta property="og:description" content="Multiple Instance Detection Network with Online Instance Classifier Refinement 华中科大 2017">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://dashuai916.github.io/images/blogs/MIDN_OICR.png">
 <meta property="article:published_time" content="2021-04-23T14:43:35.000Z">
-<meta property="article:modified_time" content="2021-05-08T05:54:58.672Z">
+<meta property="article:modified_time" content="2021-05-10T05:25:57.868Z">
 <meta property="article:author" content="Yu">
 <meta property="article:tag" content="WSOD">
 <meta name="twitter:card" content="summary">
@@ -193,7 +193,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-08 13:54:58" itemprop="dateModified" datetime="2021-05-08T13:54:58+08:00">2021-05-08</time>
+                <time title="修改时间：2021-05-10 13:25:57" itemprop="dateModified" datetime="2021-05-10T13:25:57+08:00">2021-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -225,10 +225,11 @@
       
         <blockquote>
 <p>Multiple Instance Detection Network with Online Instance Classifier Refinement</p>
+<p>华中科大 2017</p>
 </blockquote>
 <span id="more"></span>
 
-<p>我们在WSOD的MIL Line上，训练一个端到端的网络。</p>
+<h1 id="一。介绍"><a href="#一。介绍" class="headerlink" title="一。介绍"></a>一。介绍</h1><p>我们在MIL Line上，训练一个端到端的网络。</p>
 <p>只识别出目标物体的局部是基于WSOD的端到端深度网络的核心问题。为了解决这个问题，我们在本文中提出了两个改进:</p>
 <blockquote>
 <ol>
@@ -248,8 +249,30 @@
 </li>
 </ol>
 </blockquote>
-<p><img src="/images/blogs/MIDN_OICR.png"></p>
-
+<p><strong>我们的主要贡献如下：</strong></p>
+<ol>
+<li>我们提出了一个弱监督学习框架，结合MIDN和多阶段实例分类器。只需监督前一阶段的输出，实例分类器的识别能力就可以迭代地得到增强。</li>
+<li>我们进一步设计了一种新的OICR算法，该算法将基本检测网络和多级实例级分类器集成到单个网络中。提议的网络是端到端可训练的。与交替训练策略相比，该方法不仅能减少训练时间，而且能提高性能。</li>
+<li>在PASCAL VOC 2007和2012基准上，我们的方法比以前弱监督目标检测的最先进的方法获得了显著更好的结果。</li>
+</ol>
+<h1 id="二。相关工作"><a href="#二。相关工作" class="headerlink" title="二。相关工作"></a>二。相关工作</h1><p>MIL：</p>
+<blockquote>
+<ol>
+<li><p>如果一个包是正的，那么包中至少有一个实例是正的；</p>
+</li>
+<li><p>如果一个包是负的，那么包中的所有实例都是负的。</p>
+</li>
+</ol>
+</blockquote>
+<p>所以将WSOD视为MIL问题是很自然的。问题就变成了在只给定包标签（bag labels）的情况下去寻找一个实例（instances）分类器。</p>
+<h1 id="三。方法"><a href="#三。方法" class="headerlink" title="三。方法"></a>三。方法</h1><p><img src="/images/blogs/MIDN_OICR.png"></p>
+<blockquote>
+<p>proposal feature vectors(建议区域特征向量) are branched into many streams for different<br>stages. All these stages share the same proposal representations.</p>
+</blockquote>
+<p>我们的方法的整体架构如上图所示。给定一个图像，我们首先通过选择性搜索生成大约2000个对象建议。图像和这些提议被馈送到具有空间金字塔池化(SPP)层的一些卷积(conv)层，以产生每个提议的固定大小的conv特征图，然后它们被馈送到两个全连接(fc)层，以产生提议特征向量的集合。这些特征被分支成不同的流，即不同的阶段：第一个是MIDN，训练一个基本的实例分类器，其他的给精炼分类器。</p>
+<h2 id="MIDN-Multiple-instance-detection-network"><a href="#MIDN-Multiple-instance-detection-network" class="headerlink" title="MIDN(Multiple instance detection network)"></a>MIDN(Multiple instance detection network)</h2><p>训练精炼分类器需要实例(对象)级的监督，但这种监督是没有的。而实例分类器的最高分建议区域和它的相邻建议区域可以被标记到它的图像标签上作为监督。所以我们首先引入我们的MIDN来生成基础实例分类器。实现这个有很多可能的选择，在这里，我们选择了Bilen和V edaldi [4]的方法，因为这种方法的有效性并且便于实现，该方法提出了一种加权池化策略来获得实例分类器。</p>
+<p>如框架图中的MIDN block所示，建议区域特征被分为两个流，产生了两个矩阵：$ X^c $，$X^d$</p>
+<h2 id="OICR-Online-instance-classifier-refinement"><a href="#OICR-Online-instance-classifier-refinement" class="headerlink" title="OICR(Online instance classifier refinement)"></a>OICR(Online instance classifier refinement)</h2><h1 id="四。实验"><a href="#四。实验" class="headerlink" title="四。实验"></a>四。实验</h1>
     </div>
 
     
@@ -347,6 +370,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%82%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一。介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%82%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">二。相关工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%82%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">三。方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIDN-Multiple-instance-detection-network"><span class="nav-number">3.1.</span> <span class="nav-text">MIDN(Multiple instance detection network)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OICR-Online-instance-classifier-refinement"><span class="nav-number">3.2.</span> <span class="nav-text">OICR(Online instance classifier refinement)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%82%E5%AE%9E%E9%AA%8C"><span class="nav-number">4.</span> <span class="nav-text">四。实验</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -576,6 +600,59 @@ window.addEventListener('pjax:success', () => {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
