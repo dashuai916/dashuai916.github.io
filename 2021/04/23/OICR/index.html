@@ -34,8 +34,9 @@
 <meta property="og:image" content="https://dashuai916.github.io/images/blogs/WSDDN.jpg">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=x%5Er+=+%5Csigma_%7Bclass%7D(x%5Ec)+%5Codot+%5Csigma_%7Bdet%7D(x%5Ed)+">
 <meta property="og:image" content="https://www.zhihu.com/equation?tex=y+=+%5Csum_%7Br=1%7D%5E%7B%7CR%7C%7Dx%5Er">
+<meta property="og:image" content="https://dashuai916.github.io/images/blogs/WSDDN_0.png">
 <meta property="article:published_time" content="2021-04-23T14:43:35.000Z">
-<meta property="article:modified_time" content="2021-05-10T08:14:56.364Z">
+<meta property="article:modified_time" content="2021-05-10T08:42:54.014Z">
 <meta property="article:author" content="Yu">
 <meta property="article:tag" content="WSOD">
 <meta name="twitter:card" content="summary">
@@ -196,7 +197,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-10 16:14:56" itemprop="dateModified" datetime="2021-05-10T16:14:56+08:00">2021-05-10</time>
+                <time title="修改时间：2021-05-10 16:42:54" itemprop="dateModified" datetime="2021-05-10T16:42:54+08:00">2021-05-10</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -232,6 +233,7 @@
 </blockquote>
 <span id="more"></span>
 
+<p><a href="/files/OICR.pdf">论文下载</a></p>
 <h1 id="一。介绍"><a href="#一。介绍" class="headerlink" title="一。介绍"></a>一。介绍</h1><p>我们在MIL Line上，训练一个端到端的网络。</p>
 <p>只识别出目标物体的局部是基于WSOD的端到端深度网络的核心问题。为了解决这个问题，我们在本文中提出了两个改进:</p>
 <blockquote>
@@ -291,7 +293,9 @@
 </li>
 </ol>
 </blockquote>
-<p>如框架图中的MIDN block所示，建议区域特征被分为两个流，产生了两个矩阵：$ X^c，X^d \in \mathbb{R}^{C\times|R|}$ ，其中$C$表示图片的类的个数，$|R|$表示候选区域的个数。</p>
+<p>如框架图中的MIDN block所示，建议区域特征被分为两个流，产生了两个矩阵：$ X^c，X^d \in \mathbb{R}^{C\times|R|}$，其中$C$表示图片的类的个数，$|R|$表示候选区域的个数。</p>
+<p>我们通过多类交叉熵损失函数训练基本实例分类器，公式如下：</p>
+<p><img src="/images/blogs/WSDDN_0.png"></p>
 <h2 id="OICR-Online-instance-classifier-refinement"><a href="#OICR-Online-instance-classifier-refinement" class="headerlink" title="OICR(Online instance classifier refinement)"></a>OICR(Online instance classifier refinement)</h2><h1 id="四。实验"><a href="#四。实验" class="headerlink" title="四。实验"></a>四。实验</h1>
     </div>
 
