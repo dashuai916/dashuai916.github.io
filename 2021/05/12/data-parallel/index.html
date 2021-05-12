@@ -23,17 +23,21 @@
     var CONFIG = {"hostname":"dashuai916.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="欢迎来到我的个人主页">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dashuai&#39;s home page">
-<meta property="og:url" content="https://dashuai916.github.io/archives/2021/index.html">
+  <meta name="description" content="单机多卡情况下训练入门教程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="单机多GPU训练初步">
+<meta property="og:url" content="https://dashuai916.github.io/2021/05/12/data-parallel/index.html">
 <meta property="og:site_name" content="Dashuai&#39;s home page">
-<meta property="og:description" content="欢迎来到我的个人主页">
+<meta property="og:description" content="单机多卡情况下训练入门教程">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://cms.ipressroom.com.s3.amazonaws.com/219/files/20174/NVIDIA+GTC+2017+%E2%80%93+Toyota+Press+Release+final.jpg">
+<meta property="article:published_time" content="2021-05-12T11:28:05.000Z">
+<meta property="article:modified_time" content="2021-05-12T11:54:48.061Z">
 <meta property="article:author" content="Yu">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://cms.ipressroom.com.s3.amazonaws.com/219/files/20174/NVIDIA+GTC+2017+%E2%80%93+Toyota+Press+Release+final.jpg">
 
-<link rel="canonical" href="https://dashuai916.github.io/archives/2021/">
+<link rel="canonical" href="https://dashuai916.github.io/2021/05/12/data-parallel/">
 
 
 <script id="page-configurations">
@@ -41,12 +45,12 @@
   CONFIG.page = {
     sidebar: "",
     isHome : false,
-    isPost : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>归档 | Dashuai's home page</title>
+  <title>单机多GPU训练初步 | Dashuai's home page</title>
   
 
 
@@ -156,134 +160,119 @@
         <div class="content-wrap">
           
 
-          <div class="content archive">
+          <div class="content post posts-expand">
             
 
+    
   
   
-  
-  <div class="post-block">
-    <div class="posts-collapse">
-      <div class="collection-title">
-        <span class="collection-header">嗯..! 目前共计 6 篇日志。 继续努力。</span>
-      </div>
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dashuai916.github.io/2021/05/12/data-parallel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="Yu">
+      <meta itemprop="description" content="欢迎来到我的个人主页">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dashuai's home page">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          单机多GPU训练初步
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-12 19:28:05 / 修改时间：19:54:48" itemprop="dateCreated datePublished" datetime="2021-05-12T19:28:05+08:00">2021-05-12</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-    <div class="collection-year">
-      <span class="collection-header">2021</span>
-    </div>
+        <blockquote>
+<p>单机多卡情况下训练入门教程</p>
+</blockquote>
+<span id="more"></span>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+<p><img src="http://cms.ipressroom.com.s3.amazonaws.com/219/files/20174/NVIDIA+GTC+2017+%E2%80%93+Toyota+Press+Release+final.jpg"></p>
+<hr>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">os.environ[“CUDA_VISIBLE_DEVICES”] = <span class="string">&#x27;0,1,2&#x27;</span></span><br><span class="line"></span><br><span class="line">USE_CUDA = torch.cuda.is_available()</span><br><span class="line"><span class="keyword">if</span> torch.cuda.device_count() &gt; <span class="number">1</span>:</span><br><span class="line">	<span class="built_in">print</span>(<span class="string">&quot;Let&#x27;s use&quot;</span>, torch.cuda.device_count(), <span class="string">&quot;GPUs!&quot;</span>)</span><br><span class="line">	<span class="comment"># dim = 0 [30, xxx] -&gt; [10, ...], [10, ...], [10, ...] on 3 GPUs</span></span><br><span class="line">device = torch.device(<span class="string">&quot;cuda:0&quot;</span> <span class="keyword">if</span> USE_CUDA <span class="keyword">else</span> <span class="string">&quot;cpu&quot;</span>)</span><br><span class="line"></span><br><span class="line">model = torchvision.models.vgg19_bn(pretrained = <span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">model = torch.nn.DataParallel(model, device_ids=[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">model.to(device)</span><br><span class="line"><span class="comment"># 注意，若需要修改网络模块，一定要在model后面加上.module，否则会报错。</span></span><br><span class="line"><span class="comment">#model.module.avgpool = nn.AdaptiveAvgPool2d(7)</span></span><br></pre></td></tr></table></figure>
 
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-12T19:28:05+08:00"
-              content="2021-05-12">
-          05-12
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/12/data-parallel/" itemprop="url">
-            <span itemprop="name">单机多GPU训练初步</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-08T13:43:57+08:00"
-              content="2021-05-08">
-          05-08
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/08/two-stage-network/" itemprop="url">
-            <span itemprop="name">二阶段网络学习</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-05-07T14:00:14+08:00"
-              content="2021-05-07">
-          05-07
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/05/07/trt-study/" itemprop="url">
-            <span itemprop="name">TensorRT学习笔记</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-04-23T22:43:35+08:00"
-              content="2021-04-23">
-          04-23
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/23/OICR/" itemprop="url">
-            <span itemprop="name">OICR</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <div class="post-meta">
-        <time itemprop="dateCreated"
-              datetime="2021-04-17T12:54:55+08:00"
-              content="2021-04-17">
-          04-17
-        </time>
-      </div>
-
-      <div class="post-title">
-          <a class="post-title-link" href="/2021/04/17/WSDDN/" itemprop="url">
-            <span itemprop="name">WSDDN</span>
-          </a>
-      </div>
-
-    </header>
-  </article>
-
+<p><strong>提示：</strong>需要注意的是 device_ids 中包含的卡数要和 os.environ[“CUDA_VISIBLE_DEVICES”] 中包含的卡数相等。这里的卡数是指数量，无需具体卡号一一对应，此外，batch_size 的数量需要大于 GPU 的数量。</p>
+<p>剩下的工作就是将之前单卡运行时的所有 **.cuda() ** 替换为 **.to(device) **即可。</p>
+<blockquote>
+<ol>
+<li>model（如：model.to(device)）</li>
+<li>input（如：input = input).to(device)</li>
+<li>target（如：target = torch.from_numpy(np.array(target)).long()).to(device)</li>
+<li>nn.CrossEntropyLoss()（如：criterion = nn.CrossEntropyLoss().to(device)）</li>
+</ol>
+</blockquote>
+<p>参考：<a target="_blank" rel="noopener" href="https://pytorch.org/tutorials/beginner/blitz/data_parallel_tutorial.html">Pytorch官方DataParallel()教程</a></p>
 
     </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Yu 微信支付">
+        <p>微信支付</p>
+      </div>
+
   </div>
-  
-  
-  
+</div>
 
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/08/two-stage-network/" rel="prev" title="二阶段网络学习">
+      <i class="fa fa-chevron-left"></i> 二阶段网络学习
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
   
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/archives/2021/page/2/">2</a><a class="extend next" rel="next" href="/archives/2021/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
-  </nav>
+  
+  
 
 
 
@@ -564,6 +553,59 @@ window.addEventListener('pjax:success', () => {
   
 
   
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
 
   
 
