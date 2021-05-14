@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/fish-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/fish-16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Courgette:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"dashuai916.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Django学习笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Django学习笔记">
+<meta property="og:url" content="https://dashuai916.github.io/2021/05/14/django/index.html">
+<meta property="og:site_name" content="Dashuai&#39;s home page">
+<meta property="og:description" content="Django学习笔记">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://dashuai916.github.io/images/blogs/django_1.png">
+<meta property="og:image" content="https://dashuai916.github.io/images/blogs/django_2.png">
+<meta property="og:image" content="https://dashuai916.github.io/images/blogs/django_3.png">
+<meta property="article:published_time" content="2021-05-14T04:25:00.000Z">
+<meta property="article:modified_time" content="2021-05-14T05:51:59.542Z">
+<meta property="article:author" content="Yu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://dashuai916.github.io/images/blogs/django_1.png">
+
+<link rel="canonical" href="https://dashuai916.github.io/2021/05/14/django/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Django学习笔记 | Dashuai's home page</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Dashuai's home page</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">大帅的个人主页</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>笔记<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-galleries">
+
+    <a href="/galleries/" rel="section"><i class="fa fa-heart fa-fw"></i>画廊</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
+
+  </li>
+        <li class="menu-item menu-item-收藏中心">
+
+    <a href="/tools/" rel="section"><i class="fa fa-archive fa-fw"></i>收藏中心</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://dashuai916.github.io/2021/05/14/django/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/head.jpg">
+      <meta itemprop="name" content="Yu">
+      <meta itemprop="description" content="欢迎来到我的个人主页">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dashuai's home page">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Django学习笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-14 12:25:00 / 修改时间：13:51:59" itemprop="dateCreated datePublished" datetime="2021-05-14T12:25:00+08:00">2021-05-14</time>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>Django学习笔记</p>
+</blockquote>
+<span id="more"></span>
+
+<h2 id="一、开发阶段"><a href="#一、开发阶段" class="headerlink" title="一、开发阶段"></a>一、开发阶段</h2><h3 id="1-（settings-py）在pycharm的venv中创建django项目"><a href="#1-（settings-py）在pycharm的venv中创建django项目" class="headerlink" title="1.（settings.py）在pycharm的venv中创建django项目"></a>1.（settings.py）在pycharm的venv中创建django项目</h3><blockquote>
+<p>创建应用（如blog）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python startapp blog</span><br></pre></td></tr></table></figure>
+
+<p>编辑settings.py文件，配置数据库信息（mysql），增加：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;NAME&#x27;</span>: <span class="string">&#x27;blog&#x27;</span>,		<span class="comment"># 数据库名称</span></span><br><span class="line"><span class="string">&#x27;USER&#x27;</span>:<span class="string">&#x27;root&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;PASSWORD&#x27;</span>:<span class="string">&#x27;yudashuai&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;HOST&#x27;</span>:<span class="string">&#x27;localhost&#x27;</span>,</span><br><span class="line"><span class="string">&#x27;PORT&#x27;</span>:<span class="string">&#x27;3306&#x27;</span>,</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将os.join 修改为 Path</span></span><br><span class="line"><span class="string">&#x27;DIRS&#x27;</span>: [Path(BASE_DIR, <span class="string">&#x27;templates&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>在INSTALL_APPS中注册应用，增加应用名称即可。其他修改如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">TIME_ZONE = <span class="string">&#x27;Asia/Shanghai&#x27;</span></span><br><span class="line">USE_TZ = <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="2-（models-py）编写数据库模型类"><a href="#2-（models-py）编写数据库模型类" class="headerlink" title="2.（models.py）编写数据库模型类"></a>2.（models.py）编写数据库模型类</h3><blockquote>
+<p>在blog应用的models.py中编写具体的数据库模型类，如BlogArticles:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib.auth.models <span class="keyword">import</span> User</span><br><span class="line"><span class="keyword">from</span> django.db <span class="keyword">import</span> models</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your models here.</span></span><br><span class="line"><span class="keyword">from</span> django.utils <span class="keyword">import</span> timezone</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogArticles</span>(<span class="params">models.Model</span>):</span></span><br><span class="line"> title = models.CharField(max_length=<span class="number">300</span>)</span><br><span class="line"> author = models.ForeignKey(User, on_delete=models.CASCADE, related_name=<span class="string">&#x27;blog_posts&#x27;</span>)</span><br><span class="line"> body = models.TextField()</span><br><span class="line"> publish = models.DateTimeField(default=timezone.now)</span><br><span class="line"></span><br><span class="line"> <span class="class"><span class="keyword">class</span> <span class="title">META</span>:</span></span><br><span class="line">     <span class="comment"># 以publish字段逆序展示</span></span><br><span class="line">     ordering = (<span class="string">&#x27;-publish&#x27;</span>,)</span><br><span class="line"></span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">__str__</span>(<span class="params">self</span>):</span></span><br><span class="line">     <span class="keyword">return</span> self.title</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="3-数据模型迁移："><a href="#3-数据模型迁移：" class="headerlink" title="3.数据模型迁移："></a>3.数据模型迁移：</h3><blockquote>
+<p>执行python manage.py makemigrations</p>
+<p>执行python manage.py migrate</p>
+</blockquote>
+<h3 id="4-创建超级管理员"><a href="#4-创建超级管理员" class="headerlink" title="4.创建超级管理员"></a>4.创建超级管理员</h3><blockquote>
+<p>python manage.py createsuperuser</p>
+</blockquote>
+<h3 id="5-blog-admin-py-将blog写入超级管理员页面"><a href="#5-blog-admin-py-将blog写入超级管理员页面" class="headerlink" title="5.(blog/admin.py) 将blog写入超级管理员页面"></a>5.(blog/admin.py) 将blog写入超级管理员页面</h3><blockquote>
+<p>编辑blog应用下的admin.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register your models here.</span></span><br><span class="line"><span class="keyword">from</span> blog.models <span class="keyword">import</span> BlogArticles</span><br><span class="line"></span><br><span class="line">admin.site.register(BlogArticles)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="6-丰富超级管理员页面"><a href="#6-丰富超级管理员页面" class="headerlink" title="6.丰富超级管理员页面"></a>6.丰富超级管理员页面</h3><blockquote>
+<p>再次编辑blog应用下的admin.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"></span><br><span class="line"><span class="comment"># Register your models here.</span></span><br><span class="line"><span class="keyword">from</span> blog.models <span class="keyword">import</span> BlogArticles</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使实体的页面更加丰富</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogArticlesAdmin</span>(<span class="params">admin.ModelAdmin</span>):</span></span><br><span class="line"> <span class="comment"># 展示哪些字段</span></span><br><span class="line"> list_display = (<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;author&#x27;</span>, )</span><br><span class="line"> <span class="comment"># 页面右侧可选的过滤条件</span></span><br><span class="line"> list_filter = (<span class="string">&#x27;publish&#x27;</span>,)</span><br><span class="line"> <span class="comment"># 页面的搜索框(括号内的字段表示可以通过它们搜索到结果)</span></span><br><span class="line"> search_fields = (<span class="string">&#x27;title&#x27;</span>, <span class="string">&#x27;body&#x27;</span>)</span><br><span class="line"> <span class="comment"># 显示外键的详细信息</span></span><br><span class="line"> raw_id_fields = (<span class="string">&#x27;author&#x27;</span>,)</span><br><span class="line"> <span class="comment"># 若返回时区异常，则在settings.py中修改:</span></span><br><span class="line"> <span class="comment"># TIME_ZONE = &#x27;Asia/Shanghai&#x27;</span></span><br><span class="line"> <span class="comment"># USE_TZ = False</span></span><br><span class="line"> date_hierarchy = <span class="string">&#x27;publish&#x27;</span></span><br><span class="line"> ordering = [<span class="string">&#x27;-publish&#x27;</span>, <span class="string">&#x27;author&#x27;</span>]</span><br><span class="line"> </span><br><span class="line">admin.site.register(BlogArticles, BlogArticlesAdmin)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="7-进入blog-views-py模块！开始与数据库交互"><a href="#7-进入blog-views-py模块！开始与数据库交互" class="headerlink" title="7.进入blog/views.py模块！开始与数据库交互"></a>7.<em><strong>进入blog/views.py模块！开始与数据库交互</strong></em></h3><blockquote>
+<p>urls.py拦截访问请求，解析url并匹配path ==》到达views.py，views.py告诉你具体应该去哪个页面，并把处理后的数据传给静态页面</p>
+<ol>
+<li>编写views</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.shortcuts <span class="keyword">import</span> render</span><br><span class="line"></span><br><span class="line"><span class="comment"># Create your views here.</span></span><br><span class="line"><span class="keyword">from</span> blog.models <span class="keyword">import</span> BlogArticle</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">blog_title</span>(<span class="params">request</span>):</span></span><br><span class="line"> blogs = BlogArticle.objects.<span class="built_in">all</span>()</span><br><span class="line"> <span class="keyword">return</span> render(request, <span class="string">&#x27;blog/titles.html&#x27;</span>, &#123;<span class="string">&#x27;blogs&#x27;</span>:blogs&#125;)</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li><p>编写urls</p>
+<blockquote>
+<p>主urls：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;re_blog URL Configuration</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">The `urlpatterns` list routes URLs to views. For more information please see:</span></span><br><span class="line"><span class="string"> https://docs.djangoproject.com/en/3.1/topics/http/urls/</span></span><br><span class="line"><span class="string">Examples:</span></span><br><span class="line"><span class="string">Function views</span></span><br><span class="line"><span class="string">    1. Add an import:  from my_app import views</span></span><br><span class="line"><span class="string">    2. Add a URL to urlpatterns:  path(&#x27;&#x27;, views.home, name=&#x27;home&#x27;)</span></span><br><span class="line"><span class="string">Class-based views</span></span><br><span class="line"><span class="string">    1. Add an import:  from other_app.views import Home</span></span><br><span class="line"><span class="string">    2. Add a URL to urlpatterns:  path(&#x27;&#x27;, Home.as_view(), name=&#x27;home&#x27;)</span></span><br><span class="line"><span class="string">Including another URLconf</span></span><br><span class="line"><span class="string">    1. Import the include() function: from django.urls import include, path</span></span><br><span class="line"><span class="string">    2. Add a URL to urlpatterns:  path(&#x27;blog/&#x27;, include(&#x27;blog.urls&#x27;))</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="keyword">from</span> django.contrib <span class="keyword">import</span> admin</span><br><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path, include</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;admin/&#x27;</span>, admin.site.urls),</span><br><span class="line">    path(<span class="string">&#x27;blog/&#x27;</span>, include(<span class="string">&#x27;blog.urls&#x27;</span>)),</span><br><span class="line">]</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>子urls：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> django.urls <span class="keyword">import</span> path</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> blog <span class="keyword">import</span> views</span><br><span class="line"></span><br><span class="line">urlpatterns = [</span><br><span class="line">    path(<span class="string">&#x27;&#x27;</span>, views.blog_title, name=<span class="string">&#x27;blog_title&#x27;</span>),</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+</blockquote>
+</li>
+</ol>
+</blockquote>
+<h3 id="8-把所有静态文件都放到指定的目录中，在settings-py的最后添加下面的代码："><a href="#8-把所有静态文件都放到指定的目录中，在settings-py的最后添加下面的代码：" class="headerlink" title="8.把所有静态文件都放到指定的目录中，在settings.py的最后添加下面的代码："></a>8.把所有静态文件都放到指定的目录中，在settings.py的最后添加下面的代码：</h3><blockquote>
+<p>在根目录下新建static文件夹</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">STATICFILES_DIRS = (</span><br><span class="line">Path(BASE_DIR, <span class="string">&#x27;static&#x27;</span>),</span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+
+<p>上传文件的路径，在settings.py最后加：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 上传文件的目录</span></span><br><span class="line">MEDIA_ROOT = Path(BASE_DIR, <span class="string">&#x27;media&#x27;</span>)</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h3 id="9-编写登录功能"><a href="#9-编写登录功能" class="headerlink" title="9.编写登录功能"></a>9.编写登录功能</h3><blockquote>
+<p>(1) 自定义登录功能</p>
+<p><img src="/images/blogs/django_1.png"></p>
+<p>（2）调用django登录功能（减少了编写view的需求）</p>
+<p><img src="/images/blogs/django_2.png"></p>
+<p>备注：% url ‘account：user_login’ % 中，account是应用名称，user_login是url的名称，如：</p>
+<p><img src="/images/blogs/django_3.png"></p>
+</blockquote>
+<hr>
+<h2 id="二、-生产环境部署"><a href="#二、-生产环境部署" class="headerlink" title="二、 生产环境部署"></a>二、 生产环境部署</h2><blockquote>
+<p>（centos+uwsgi+nginx+mysql）</p>
+</blockquote>
+<p>开启django时，使用0.0.0.0:xxxx，作为ip和端口例如：</p>
+<p><strong>python manage.py runserver 0.0.0.0:9000</strong></p>
+<p>然后在settings里修改ALLOWED_HOSTS = []，</p>
+<p>改为**ALLOWED_HOSTS = [‘*‘,]**，注意不要漏掉“，”。</p>
+<p>其他机器就可以通过这台机器的ip和端口号访问django了。</p>
+<hr>
+<h2 id="三、web开发技巧"><a href="#三、web开发技巧" class="headerlink" title="三、web开发技巧"></a>三、web开发技巧</h2><h3 id="1-上传图片后立即预览"><a href="#1-上传图片后立即预览" class="headerlink" title="1.上传图片后立即预览"></a>1.上传图片后立即预览</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>html5上传后立即显示<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span>&gt;</span></span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">ProcessFile</span>(<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> file = <span class="built_in">document</span>.getElementById(<span class="string">&#x27;file&#x27;</span>).files[<span class="number">0</span>];</span></span><br><span class="line">            if (file) &#123;</span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span></span><br><span class="line"><span class="javascript">                reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">var</span> txt = event.target.result;</span></span><br><span class="line"> </span><br><span class="line"><span class="javascript">                    <span class="keyword">var</span> img = <span class="built_in">document</span>.createElement(<span class="string">&quot;img&quot;</span>);</span></span><br><span class="line"><span class="javascript">                    img.src = txt;<span class="comment">//将图片base64字符串赋值给img的src</span></span></span><br><span class="line"><span class="javascript">                   <span class="comment">// console.log(txt);</span></span></span><br><span class="line"><span class="javascript">                    <span class="built_in">document</span>.getElementById(<span class="string">&quot;result&quot;</span>).appendChild(img);</span></span><br><span class="line">                &#125;;</span><br><span class="line">            &#125;</span><br><span class="line">            reader.readAsDataURL(file);</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="javascript">        <span class="function"><span class="keyword">function</span> <span class="title">contentLoaded</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">document</span>.getElementById(<span class="string">&#x27;file&#x27;</span>).addEventListener(<span class="string">&#x27;change&#x27;</span>,</span></span><br><span class="line"><span class="javascript">                ProcessFile, <span class="literal">false</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line"><span class="javascript">        <span class="built_in">window</span>.addEventListener(<span class="string">&quot;DOMContentLoaded&quot;</span>, contentLoaded, <span class="literal">false</span>);</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">请选取一个图像文件: <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;file&quot;</span> <span class="attr">id</span>=<span class="string">&quot;file&quot;</span> <span class="attr">name</span>=<span class="string">&quot;file&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;result&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;1.jpg&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="Yu 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/05/12/data-parallel/" rel="prev" title="单机多GPU训练学习">
+      <i class="fa fa-chevron-left"></i> 单机多GPU训练学习
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%BC%80%E5%8F%91%E9%98%B6%E6%AE%B5"><span class="nav-number">1.</span> <span class="nav-text">一、开发阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%EF%BC%88settings-py%EF%BC%89%E5%9C%A8pycharm%E7%9A%84venv%E4%B8%AD%E5%88%9B%E5%BB%BAdjango%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.1.</span> <span class="nav-text">1.（settings.py）在pycharm的venv中创建django项目</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%EF%BC%88models-py%EF%BC%89%E7%BC%96%E5%86%99%E6%95%B0%E6%8D%AE%E5%BA%93%E6%A8%A1%E5%9E%8B%E7%B1%BB"><span class="nav-number">1.2.</span> <span class="nav-text">2.（models.py）编写数据库模型类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%E8%BF%81%E7%A7%BB%EF%BC%9A"><span class="nav-number">1.3.</span> <span class="nav-text">3.数据模型迁移：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E5%88%9B%E5%BB%BA%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98"><span class="nav-number">1.4.</span> <span class="nav-text">4.创建超级管理员</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-blog-admin-py-%E5%B0%86blog%E5%86%99%E5%85%A5%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.5.</span> <span class="nav-text">5.(blog&#x2F;admin.py) 将blog写入超级管理员页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-%E4%B8%B0%E5%AF%8C%E8%B6%85%E7%BA%A7%E7%AE%A1%E7%90%86%E5%91%98%E9%A1%B5%E9%9D%A2"><span class="nav-number">1.6.</span> <span class="nav-text">6.丰富超级管理员页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E8%BF%9B%E5%85%A5blog-views-py%E6%A8%A1%E5%9D%97%EF%BC%81%E5%BC%80%E5%A7%8B%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92"><span class="nav-number">1.7.</span> <span class="nav-text">7.进入blog&#x2F;views.py模块！开始与数据库交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%8A%8A%E6%89%80%E6%9C%89%E9%9D%99%E6%80%81%E6%96%87%E4%BB%B6%E9%83%BD%E6%94%BE%E5%88%B0%E6%8C%87%E5%AE%9A%E7%9A%84%E7%9B%AE%E5%BD%95%E4%B8%AD%EF%BC%8C%E5%9C%A8settings-py%E7%9A%84%E6%9C%80%E5%90%8E%E6%B7%BB%E5%8A%A0%E4%B8%8B%E9%9D%A2%E7%9A%84%E4%BB%A3%E7%A0%81%EF%BC%9A"><span class="nav-number">1.8.</span> <span class="nav-text">8.把所有静态文件都放到指定的目录中，在settings.py的最后添加下面的代码：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-%E7%BC%96%E5%86%99%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD"><span class="nav-number">1.9.</span> <span class="nav-text">9.编写登录功能</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2"><span class="nav-number">2.</span> <span class="nav-text">二、 生产环境部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81web%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7"><span class="nav-number">3.</span> <span class="nav-text">三、web开发技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%B8%8A%E4%BC%A0%E5%9B%BE%E7%89%87%E5%90%8E%E7%AB%8B%E5%8D%B3%E9%A2%84%E8%A7%88"><span class="nav-number">3.1.</span> <span class="nav-text">1.上传图片后立即预览</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Yu"
+      src="/images/head.jpg">
+  <p class="site-author-name" itemprop="name">Yu</p>
+  <div class="site-description" itemprop="description">欢迎来到我的个人主页</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">分类</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="mailto:970972807@qq.com" title="E-Mail → mailto:970972807@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.zhihu.com/people/da-shuai-5-44" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;da-shuai-5-44" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>知乎</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">970972807@qq.com</span>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script data-pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+  <script data-pjax>
+    (function(){
+      var canonicalURL, curProtocol;
+      //Get the <link> tag
+      var x=document.getElementsByTagName("link");
+		//Find the last canonical URL
+		if(x.length > 0){
+			for (i=0;i<x.length;i++){
+				if(x[i].rel.toLowerCase() == 'canonical' && x[i].href){
+					canonicalURL=x[i].href;
+				}
+			}
+		}
+    //Get protocol
+	    if (!canonicalURL){
+	    	curProtocol = window.location.protocol.split(':')[0];
+	    }
+	    else{
+	    	curProtocol = canonicalURL.split(':')[0];
+	    }
+      //Get current URL if the canonical URL does not exist
+	    if (!canonicalURL) canonicalURL = window.location.href;
+	    //Assign script content. Replace current URL with the canonical URL
+      !function(){var e=/([http|https]:\/\/[a-zA-Z0-9\_\.]+\.baidu\.com)/gi,r=canonicalURL,t=document.referrer;if(!e.test(r)){var n=(String(curProtocol).toLowerCase() === 'https')?"https://sp0.baidu.com/9_Q4simg2RQJ8t7jm9iCKT-xh_/s.gif":"//api.share.baidu.com/s.gif";t?(n+="?r="+encodeURIComponent(document.referrer),r&&(n+="&l="+r)):r&&(n+="?l="+r);var i=new Image;i.src=n}}(window);})();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+    </div>
+</body>
+</html>
