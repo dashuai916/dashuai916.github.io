@@ -42,8 +42,10 @@
 <meta property="og:image" content="https://dashuai916.github.io/images/blogs/OICR-4.png">
 <meta property="og:image" content="https://pic1.zhimg.com/80/v2-ab077d8ea4f4aa707a58659c0b1f9bcc_720w.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-9b8ee6c54b450ffdba193dd9af36a78b_720w.jpg">
+<meta property="og:image" content="https://dashuai916.github.io/images/blogs/OICR-5.png">
+<meta property="og:image" content="https://dashuai916.github.io/images/blogs/OICR-6.png">
 <meta property="article:published_time" content="2021-04-23T14:43:35.000Z">
-<meta property="article:modified_time" content="2021-05-20T12:12:28.611Z">
+<meta property="article:modified_time" content="2021-05-20T12:34:27.501Z">
 <meta property="article:author" content="Yu">
 <meta property="article:tag" content="WSOD">
 <meta name="twitter:card" content="summary">
@@ -214,7 +216,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-20 20:12:28" itemprop="dateModified" datetime="2021-05-20T20:12:28+08:00">2021-05-20</time>
+                <time title="修改时间：2021-05-20 20:34:27" itemprop="dateModified" datetime="2021-05-20T20:34:27+08:00">2021-05-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -337,6 +339,12 @@
 <p>Selective Search被用于给每张图片生成约2000个proposals。为了数据增强，我们使用5种图片尺度：{480，576，688，864，1200}（调整最短的边），在训练和测试中，用水平翻转将最长图像侧的长度限制在2000以内。</p>
 <p>我们精炼模型3次，即K=3。所以一共有4个阶段。伪代码第12行中的$I_t$设置为0.5。</p>
 <p>在测试期间，选择这三个细化分类器的平均输出。我们通过选择由我们的方法给出的最高分建议作为伪gt来进一步改进我们的结果。</p>
+<h2 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h2><h3 id="instance-classifier-refinement的影响"><a href="#instance-classifier-refinement的影响" class="headerlink" title="instance classifier refinement的影响"></a>instance classifier refinement的影响</h3><p><img src="/images/blogs/OICR-5.png"></p>
+<p>但随着精炼次数增加，网络趋向于收敛。</p>
+<h3 id="OICR的影响"><a href="#OICR的影响" class="headerlink" title="OICR的影响"></a>OICR的影响</h3><p>通过上图能发现，随着精炼次数的增加，alternative 策略和OICR策略都能提高效果，但是OICR提升的效果更显著，这也确定了共享表示的重要性。与此同时，OICR能减少大量的时间，因为它只需要训练一次模型，而不像alternative策略中第k次精炼需要训练k+1次模型。</p>
+<h3 id="权重损失的影响"><a href="#权重损失的影响" class="headerlink" title="权重损失的影响"></a>权重损失的影响</h3><p>无权重损失时，OICR的效果比alternative更差。</p>
+<h3 id="IoU阈值的影响"><a href="#IoU阈值的影响" class="headerlink" title="IoU阈值的影响"></a>IoU阈值的影响</h3><p><img src="/images/blogs/OICR-6.png"></p>
+<p>由图，故设置为0.5。</p>
 
     </div>
 
@@ -435,7 +443,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%82%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一。介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%82%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">二。相关工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%82%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">三。方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIDN-Multiple-instance-detection-network"><span class="nav-number">3.1.</span> <span class="nav-text">MIDN(Multiple instance detection network)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OICR-Online-instance-classifier-refinement"><span class="nav-number">3.2.</span> <span class="nav-text">OICR(Online instance classifier refinement)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%82%E5%AE%9E%E9%AA%8C"><span class="nav-number">4.</span> <span class="nav-text">四。实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8C%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">数据集和评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">4.2.</span> <span class="nav-text">实现细节</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%82%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一。介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%82%E7%9B%B8%E5%85%B3%E5%B7%A5%E4%BD%9C"><span class="nav-number">2.</span> <span class="nav-text">二。相关工作</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%89%E3%80%82%E6%96%B9%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">三。方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#MIDN-Multiple-instance-detection-network"><span class="nav-number">3.1.</span> <span class="nav-text">MIDN(Multiple instance detection network)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#OICR-Online-instance-classifier-refinement"><span class="nav-number">3.2.</span> <span class="nav-text">OICR(Online instance classifier refinement)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9B%9B%E3%80%82%E5%AE%9E%E9%AA%8C"><span class="nav-number">4.</span> <span class="nav-text">四。实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8C%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="nav-number">4.1.</span> <span class="nav-text">数据集和评估方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="nav-number">4.2.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="nav-number">4.3.</span> <span class="nav-text">消融实验</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#instance-classifier-refinement%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">4.3.1.</span> <span class="nav-text">instance classifier refinement的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OICR%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">4.3.2.</span> <span class="nav-text">OICR的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%83%E9%87%8D%E6%8D%9F%E5%A4%B1%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">4.3.3.</span> <span class="nav-text">权重损失的影响</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IoU%E9%98%88%E5%80%BC%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">4.3.4.</span> <span class="nav-text">IoU阈值的影响</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
