@@ -32,7 +32,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/graphics/overview.png">
 <meta property="article:published_time" content="2021-05-07T06:00:14.000Z">
-<meta property="article:modified_time" content="2021-05-08T05:55:11.046Z">
+<meta property="article:modified_time" content="2021-05-26T13:40:58.226Z">
 <meta property="article:author" content="Yu">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/graphics/overview.png">
@@ -118,29 +118,29 @@
 
 <nav class="site-nav">
   <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-archives">
+        <li class="menu-item menu-item-文章-(notes)">
 
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>笔记<span class="badge">7</span></a>
-
-  </li>
-        <li class="menu-item menu-item-galleries">
-
-    <a href="/galleries/" rel="section"><i class="fa fa-heart fa-fw"></i>画廊</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>文章 (Notes)</a>
 
   </li>
-        <li class="menu-item menu-item-about">
+        <li class="menu-item menu-item-画廊-(galleries)">
 
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我</a>
-
-  </li>
-        <li class="menu-item menu-item-收藏中心">
-
-    <a href="/tools/" rel="section"><i class="fa fa-archive fa-fw"></i>收藏中心</a>
+    <a href="/galleries/" rel="section"><i class="fa fa-heart fa-fw"></i>画廊 (Galleries)</a>
 
   </li>
-        <li class="menu-item menu-item-演示数据">
+        <li class="menu-item menu-item-关于我-(about-me)">
 
-    <a href="/datasets/" rel="section"><i class="fa fa-link fa-fw"></i>演示数据</a>
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于我 (About me)</a>
+
+  </li>
+        <li class="menu-item menu-item-收藏中心-(tools)">
+
+    <a href="/tools/" rel="section"><i class="fa fa-archive fa-fw"></i>收藏中心 (Tools)</a>
+
+  </li>
+        <li class="menu-item menu-item-演示数据-(datasets)">
+
+    <a href="/datasets/" rel="section"><i class="fa fa-link fa-fw"></i>演示数据 (Datasets)</a>
 
   </li>
   </ul>
@@ -177,7 +177,7 @@
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/head.jpg">
       <meta itemprop="name" content="Yu">
-      <meta itemprop="description" content="研究方向：弱监督学习（目标检测）">
+      <meta itemprop="description" content="研究方向：弱监督目标检测 (Weakly Supervised Object Detection)">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
@@ -202,7 +202,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-08 13:55:11" itemprop="dateModified" datetime="2021-05-08T13:55:11+08:00">2021-05-08</time>
+                <time title="修改时间：2021-05-26 21:40:58" itemprop="dateModified" datetime="2021-05-26T21:40:58+08:00">2021-05-26</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -238,16 +238,22 @@
 <span id="more"></span>
 
 <p><img src="https://docs.nvidia.com/deeplearning/tensorrt/developer-guide/graphics/overview.png" alt="官方图"></p>
-<p>pytorch –&gt; tensorrt工具：<a target="_blank" rel="noopener" href="https://github.com/NVIDIA-AI-IOT/torch2trt">torch2trt</a></p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://github.com/NVIDIA-AI-IOT/torch2trt</span><br><span class="line">cd torch2trt</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
-
+<p>pytorch –&gt; onnx –&gt; tensorrt</p>
+<h1 id="一、-pytorch-–-gt-onnx"><a href="#一、-pytorch-–-gt-onnx" class="headerlink" title="一、 pytorch –&gt; onnx"></a>一、 pytorch –&gt; onnx</h1><p>![](G:\CODE\github page\dashuai916.github.io\themes\next\source\images\blogs\trt_1.png)</p>
 <hr>
-<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><h3 id="1-转换"><a href="#1-转换" class="headerlink" title="1.  转换"></a>1.  转换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">from</span> torch2trt <span class="keyword">import</span> torch2trt</span><br><span class="line"><span class="keyword">from</span> torchvision.models.alexnet <span class="keyword">import</span> alexnet</span><br><span class="line"></span><br><span class="line"><span class="comment"># create some regular pytorch model...</span></span><br><span class="line">model = alexnet(pretrained=<span class="literal">True</span>).<span class="built_in">eval</span>().cuda()</span><br><span class="line"></span><br><span class="line"><span class="comment"># create example data</span></span><br><span class="line">x = torch.ones((<span class="number">1</span>, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)).cuda()</span><br><span class="line"></span><br><span class="line"><span class="comment"># convert to TensorRT feeding sample data as input</span></span><br><span class="line">model_trt = torch2trt(model, [x])</span><br></pre></td></tr></table></figure>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="1-加载pytorch模型"><a href="#1-加载pytorch模型" class="headerlink" title="1.  加载pytorch模型"></a>1.  加载pytorch模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torchvision.models <span class="keyword">as</span> models</span><br><span class="line"></span><br><span class="line">resnext50_32x4d = models.resnext50_32x4d(pretrained=<span class="literal">True</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="2-执行"><a href="#2-执行" class="headerlink" title="2. 执行"></a>2. 执行</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = model(x)</span><br><span class="line">y_trt = model_trt(x)</span><br><span class="line"></span><br><span class="line"><span class="comment"># check the output against PyTorch</span></span><br><span class="line"><span class="built_in">print</span>(torch.<span class="built_in">max</span>(torch.<span class="built_in">abs</span>(y - y_trt)))</span><br></pre></td></tr></table></figure>
+<h3 id="2-保存onnx模型"><a href="#2-保存onnx模型" class="headerlink" title="2. 保存onnx模型"></a>2. 保存onnx模型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">BATCH_SIZE = <span class="number">64</span></span><br><span class="line">dummy_input=torch.randn(BATCH_SIZE, <span class="number">3</span>, <span class="number">224</span>, <span class="number">224</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> torch.onnx</span><br><span class="line">torch.onnx.export(resnext50_32x4d, dummy_input, <span class="string">&quot;resnet50_onnx_model.onnx&quot;</span>, verbose=<span class="literal">False</span>)</span><br></pre></td></tr></table></figure>
 
-<h3 id="3-保存和加载"><a href="#3-保存和加载" class="headerlink" title="3. 保存和加载"></a>3. 保存和加载</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># save</span></span><br><span class="line">torch.save(model_trt.state_dict(), <span class="string">&#x27;alexnet_trt.pth&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># load</span></span><br><span class="line"><span class="keyword">from</span> torch2trt <span class="keyword">import</span> TRTModule</span><br><span class="line"></span><br><span class="line">model_trt = TRTModule()</span><br><span class="line">model_trt.load_state_dict(torch.load(<span class="string">&#x27;alexnet_trt.pth&#x27;</span>))</span><br></pre></td></tr></table></figure>
+<h1 id="二、onnx-–-gt-tensorrt-engine"><a href="#二、onnx-–-gt-tensorrt-engine" class="headerlink" title="二、onnx –&gt; tensorrt engine"></a>二、onnx –&gt; tensorrt engine</h1><p>有两种转换方法：</p>
+<ol>
+<li>使用 trtexec</li>
+<li>使用 TensorRT API</li>
+</ol>
+<p>这里我们使用第一种方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">trtexec --onnx=resnet50_onnx_model.onnx --saveEngine=resnet_engine.trt  --explicitBatch</span><br></pre></td></tr></table></figure>
 
+<p>这会把resnet50_onnx_model.onnx转换为resnet_engine.trt。</p>
 
     </div>
 
@@ -343,7 +349,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="nav-number">2.</span> <span class="nav-text">使用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%BD%AC%E6%8D%A2"><span class="nav-number">2.1.</span> <span class="nav-text">1.  转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%89%A7%E8%A1%8C"><span class="nav-number">2.2.</span> <span class="nav-text">2. 执行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E4%BF%9D%E5%AD%98%E5%92%8C%E5%8A%A0%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">3. 保存和加载</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81-pytorch-%E2%80%93-gt-onnx"><span class="nav-number">1.</span> <span class="nav-text">一、 pytorch –&gt; onnx</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.1.</span> <span class="nav-text">步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%8A%A0%E8%BD%BDpytorch%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.  加载pytorch模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E4%BF%9D%E5%AD%98onnx%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 保存onnx模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81onnx-%E2%80%93-gt-tensorrt-engine"><span class="nav-number">2.</span> <span class="nav-text">二、onnx –&gt; tensorrt engine</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -352,13 +358,12 @@
     <img class="site-author-image" itemprop="image" alt="Yu"
       src="/images/head.jpg">
   <p class="site-author-name" itemprop="name">Yu</p>
-  <div class="site-description" itemprop="description">研究方向：弱监督学习（目标检测）</div>
+  <div class="site-description" itemprop="description">研究方向：弱监督目标检测 (Weakly Supervised Object Detection)</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
+          <a href="/archives">
           <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
@@ -375,10 +380,7 @@
 </div>
   <div class="links-of-author motion-element">
       <span class="links-of-author-item">
-        <a href="mailto:970972807@qq.com" title="E-Mail → mailto:970972807@qq.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
-      </span>
-      <span class="links-of-author-item">
-        <a href="https://www.zhihu.com/people/da-shuai-5-44" title="知乎 → https:&#x2F;&#x2F;www.zhihu.com&#x2F;people&#x2F;da-shuai-5-44" rel="noopener" target="_blank"><i class="fab fa-internet-explorer fa-fw"></i>知乎</a>
+        <a href="mailto:dashuai916@gmail.com" title="E-Mail → mailto:dashuai916@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
       </span>
   </div>
   <div class="cc-license motion-element" itemprop="license">
@@ -410,7 +412,7 @@
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">970972807@qq.com</span>
+  <span class="author" itemprop="copyrightHolder">dashuai916@gmail.com</span>
 </div>
 
         
